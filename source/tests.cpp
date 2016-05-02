@@ -60,6 +60,38 @@ TEST_CASE("describe_vektor_div", "[div vec2]")
 	REQUIRE(Approx(1.0f) == v.y);
 }
 
+TEST_CASE("describe_2vektor_add", "[2add vec2]")
+{
+	Vec2 v{1.5f, 2.5f};
+	Vec2 w{2.5f, 3.5f};
+	Vec2 z{0.0f, 5.0f};
+
+	REQUIRE(Approx(4.0f) == (v + w).x);
+	REQUIRE(Approx(6.0f) == (v + w).y);
+
+	REQUIRE(Approx(1.5f) == (v + z).x);
+	REQUIRE(Approx(7.5f) == (v + z).y);
+
+	REQUIRE(Approx(2.5f) == (w + z).x);
+	REQUIRE(Approx(8.5f) == (w + z).y);
+}
+
+TEST_CASE("describe_2vektor_sub", "[2sub vec2]")
+{
+	Vec2 v{1.5f, 2.5f};
+	Vec2 w{2.5f, 3.5f};
+	Vec2 z{0.0f, 5.0f};
+
+	REQUIRE(Approx(-1.0f) == (v - w).x);
+	REQUIRE(Approx(-1.0f) == (v - w).y);
+
+	REQUIRE(Approx(1.5f) == (v - z).x);
+	REQUIRE(Approx(-2.5f) == (v - z).y);
+
+	REQUIRE(Approx(2.5f) == (w - z).x);
+	REQUIRE(Approx(-1.5f) == (w - z).y);
+}
+
 int main(int argc, char *argv[])
 {
   return Catch::Session().run(argc, argv);
