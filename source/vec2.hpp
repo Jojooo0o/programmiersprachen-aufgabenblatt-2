@@ -17,7 +17,7 @@ public:
 	float x;
 	float y;
 };
-
+	//operatoren ! in class
 	Vec2 operator + (Vec2 const& u, Vec2 const& v);
 	Vec2 operator - (Vec2 const& u, Vec2 const& v);
 	Vec2 operator * (Vec2 const& v, float s);

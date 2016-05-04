@@ -1,6 +1,7 @@
 #define CATCH_CONFIG_RUNNER
 #include <catch.hpp>
 #include "vec2.hpp"
+#include "mat2.hpp"
 
 TEST_CASE("describe_default_constructor", "[constructor vec2]")
 {
@@ -139,6 +140,99 @@ TEST_CASE("describe_2vektor_multi2", "[2multi2 vec2]")
 	REQUIRE(Approx(10.0f) == (a * v.y));
 	REQUIRE(Approx(14.0f) == (a * w.y));
 	REQUIRE(Approx(20.0f) == (a * z.y));
+}
+
+TEST_CASE("describe_matrix_multi", "[multi mat2]")
+{
+	//constructor-test
+	Mat2 l;
+	Mat2 m{1.0f, 2.0f, 3.0f, 4.0f};
+	Mat2 n{4.0f, 3.0f, 2.0f, 1.0f};
+	Mat2 o{2.0f, 0.0f, 2.0f, 0.0f};
+
+	REQUIRE(Approx(1.0f) == l.a1_1);
+	REQUIRE(Approx(0.0f) == l.a1_2);
+	REQUIRE(Approx(0.0f) == l.a2_1);
+	REQUIRE(Approx(1.0f) == l.a2_2);
+
+	m *= n;
+
+	REQUIRE(Approx(8.0f) == m.a1_1);
+	REQUIRE(Approx(5.0f) == m.a1_2);
+	REQUIRE(Approx(20.0f) == m.a2_1);
+	REQUIRE(Approx(13.0f) == m.a2_2);
+
+	m *= o;
+
+	REQUIRE(Approx(26.0f) == m.a1_1);
+	REQUIRE(Approx(0.0f) == m.a1_2);
+	REQUIRE(Approx(66.0f) == m.a2_1);
+	REQUIRE(Approx(0.0f) == m.a2_2);
+
+	n *= o;
+	REQUIRE(Approx(14.0f) == n.a1_1);
+	REQUIRE(Approx(0.0f) == n.a1_2);
+	REQUIRE(Approx(6.0f) == n.a2_1);
+	REQUIRE(Approx(0.0f) == n.a2_2);
+}
+
+TEST_CASE("describe_2matrix_multi", "[2multi mat2]"){
+
+	Mat2 m{1.0f, 2.0f, 3.0f, 4.0f};
+	Mat2 n{4.0f, 3.0f, 2.0f, 1.0f};
+	Mat2 o{2.0f, 0.0f, 2.0f, 0.0f};
+
+	Mat2 a = m * n;
+
+	REQUIRE(Approx(8.0f) == a.a1_1);
+	REQUIRE(Approx(5.0f) == a.a1_2);
+	REQUIRE(Approx(20.0f) == a.a2_1);
+	REQUIRE(Approx(13.0f) == a.a2_2);
+
+	Mat2 b = m * o;
+
+	REQUIRE(Approx(6.0f) == b.a1_1);
+	REQUIRE(Approx(0.0f) == b.a1_2);
+	REQUIRE(Approx(14.0f) == b.a2_1);
+	REQUIRE(Approx(0.0f) == b.a2_2);
+
+	Mat2 c = n * o;
+	
+	REQUIRE(Approx(14.0f) == c.a1_1);
+	REQUIRE(Approx(0.0f) == c.a1_2);
+	REQUIRE(Approx(6.0f) == c.a2_1);
+	REQUIRE(Approx(0.0f) == c.a2_2);
+}
+
+
+TEST_CASE("describe_matrix_vec", "[multi matvec2]"){
+
+	Mat2 m{1.0f, 2.0f, 3.0f, 4.0f};
+	Vec2 n{2.0f, 2.0f};
+
+	Vec2 a = m * n;
+	
+	REQUIRE(Approx(6.0f) == a.x);
+	REQUIRE(Approx(14.0f) == a.y);
+}
+
+TEST_CASE("describe_matrix_vec2", "[multi 2matvec2]"){
+
+	Mat2 n{1.0f, 2.0f, 3.0f, 4.0f};
+	Vec2 m{2.0f, 2.0f};
+
+	Vec2 a = m * n;
+	
+	REQUIRE(Approx(6.0f) == a.x);
+	REQUIRE(Approx(14.0f) == a.y);
+}
+
+TEST_CASE("describe_matrix_det", "[det]"){
+
+	Mat2 n{1.0f, 2.0f, 3.0f, 4.0f};
+
+	REQUIRE(Approx(-2.0f) == n.det());
+
 }
 
 int main(int argc, char *argv[])
