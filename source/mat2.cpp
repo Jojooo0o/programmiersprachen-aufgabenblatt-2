@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 #include "mat2.hpp"
 #include "vec2.hpp"
 
@@ -63,7 +64,7 @@ Vec2 operator * (Mat2 const& m, Vec2 const& v)
 Vec2 operator * (Vec2 const& v, Mat2 const& m)
 {
 	Vec2 w;
-
+	//eigentlich nicht mathematisch korrekt
 	float a = m.a1_1 * v.x + m.a1_2 * v.y;
 	float b = m.a2_1 * v.x + m.a2_2 * v.y;
 	w.x = a;
@@ -75,4 +76,40 @@ Vec2 operator * (Vec2 const& v, Mat2 const& m)
 float Mat2::det () const
 {
 	return a1_1 * a2_2 - a1_2 * a2_1;
+}
+
+Mat2 inverse(Mat2 const& m)
+{
+	if(m.det()== 0){
+		return Mat2{0,0,0,0};
+	}else{
+		float z = 1 / m.det();
+
+		float a = m.a2_2 * z;
+		float b = -m.a1_2 * z;
+		float c = -m.a2_1 * z;
+		float d = m.a1_1 * z;
+		return Mat2{a,b,c,d};
+	}
+}
+
+Mat2 transponse(Mat2 const& m)
+{
+	float a = m.a1_1;
+	float b = m.a2_1;
+	float c = m.a1_2;
+	float d = m.a2_2;
+
+	return Mat2{a,b,c,d};
+}
+
+Mat2 make_rotation_mat2(float phi)
+{
+
+	float a = cos(phi);
+	float b = -sin(phi);
+	float c = sin(phi);
+	float d = cos(phi);
+
+	return Mat2{a,b,c,d};
 }

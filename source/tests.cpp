@@ -1,7 +1,9 @@
 #define CATCH_CONFIG_RUNNER
 #include <catch.hpp>
+#include <cmath>
 #include "vec2.hpp"
 #include "mat2.hpp"
+
 
 TEST_CASE("describe_default_constructor", "[constructor vec2]")
 {
@@ -227,12 +229,47 @@ TEST_CASE("describe_matrix_vec2", "[multi 2matvec2]"){
 	REQUIRE(Approx(14.0f) == a.y);
 }
 
-TEST_CASE("describe_matrix_det", "[det]"){
+TEST_CASE("describe_matrix_det", "[matrix det]"){
 
 	Mat2 n{1.0f, 2.0f, 3.0f, 4.0f};
 
 	REQUIRE(Approx(-2.0f) == n.det());
 
+}
+
+TEST_CASE("describe_matrix_inverse", "[matrix inverse]"){
+
+	Mat2 n{1.0f, 2.0f, 3.0f, 4.0f};
+
+	n = inverse(n);
+
+	REQUIRE(Approx(-2.0f) == n.a1_1);
+	REQUIRE(Approx(1.0f) == n.a1_2);
+	REQUIRE(Approx(1.5f) == n.a2_1);
+	REQUIRE(Approx(-0.5f) == n.a2_2);
+}
+
+TEST_CASE("describe_matrix_transponse", "[matrix transponse]"){
+
+	Mat2 n{1.0f, 2.0f, 3.0f, 4.0f};
+
+	n = transponse(n);
+
+	REQUIRE(Approx(1.0f) == n.a1_1);
+	REQUIRE(Approx(3.0f) == n.a1_2);
+	REQUIRE(Approx(2.0f) == n.a2_1);
+	REQUIRE(Approx(4.0f) == n.a2_2);
+}
+
+TEST_CASE("describe_matrix_rotate", "[matrix rotate]"){
+
+	Mat2 n = make_rotation_mat2(M_PI/2);
+	Vec2 v{1.0,0.0};
+
+	v = v * n;
+
+	REQUIRE(Approx(0.0f) == v.x);
+	REQUIRE(Approx(1.0f) == v.y);
 }
 
 int main(int argc, char *argv[])

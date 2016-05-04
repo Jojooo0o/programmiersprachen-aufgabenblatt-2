@@ -32,10 +32,17 @@ Vec2& Vec2::operator *= (float v)
 }
 Vec2& Vec2::operator / (float v)
 {
+	if(v == 0.0f)
+	{
+		x *= v;
+		y *=   v;
+		return *this;
+	}else{
 	x = x / v;
 	y = y / v;
 
 	return *this;
+	}
 }
 
 Vec2 operator + (Vec2 const& u, Vec2 const& v)
@@ -65,10 +72,15 @@ Vec2 operator * (Vec2 const& v, float s)
 Vec2 operator / (Vec2 const& v, float s)
 {
 	Vec2 a;
-	a.x = v.x / s;
-	a.y = v.y / s;
+	if(s == 0.0f)
+	{
+		return a;
+	}else{
+		a.x = v.x / s;
+		a.y = v.y / s;
 
-	return a;
+		return a;
+	}
 }
 Vec2 operator * (float s, Vec2 const& v)
 {
