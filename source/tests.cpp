@@ -56,12 +56,9 @@ TEST_CASE("describe_vektor_div", "[div vec2]")
 	float z = 0.0f;
 
 	v / w;
-	v / z;
 
 	REQUIRE(Approx(1.5f) == v.x);
 	REQUIRE(Approx(1.0f) == v.y);
-	REQUIRE(Approx(0.0f) == v.x);
-	REQUIRE(Approx(0.0f) == v.y);
 }
 
 TEST_CASE("describe_2vektor_add", "[2add vec2]")
@@ -103,13 +100,13 @@ TEST_CASE("describe_2vektor_multi", "[2multi vec2]")
 	Vec2 z{0.0f, 5.0f};
 	float a = 2.0f;
 
-	REQUIRE(Approx(3.0f) == (v.x * a);
-	REQUIRE(Approx(5.0f) == (w.x * a);
-	REQUIRE(Approx(0.0f) == (z.x * a);
+	REQUIRE(Approx(3.0f) == (v.x * a));
+	REQUIRE(Approx(5.0f) == (w.x * a));
+	REQUIRE(Approx(0.0f) == (z.x * a));
 	
-	REQUIRE(Approx(5.0f) == (v.y * a);
-	REQUIRE(Approx(7.0f) == (w.y * a);
-	REQUIRE(Approx(10.0f) == (z.y * a);
+	REQUIRE(Approx(5.0f) == (v.y * a));
+	REQUIRE(Approx(7.0f) == (w.y * a));
+	REQUIRE(Approx(10.0f) == (z.y * a));
 }
 
 TEST_CASE("describe_2vektor_div", "[2div vec2]")
@@ -119,13 +116,13 @@ TEST_CASE("describe_2vektor_div", "[2div vec2]")
 	Vec2 z{0.0f, 5.0f};
 	float a = 2.0f;
 
-	REQUIRE(Approx(2.0f) == (v.x / a);
-	REQUIRE(Approx(1.0f) == (w.x / a);
-	REQUIRE(Approx(0.0f) == (z.x / a);
+	REQUIRE(Approx(2.0f) == (v.x / a));
+	REQUIRE(Approx(1.0f) == (w.x / a));
+	REQUIRE(Approx(0.0f) == (z.x / a));
 	
-	REQUIRE(Approx(5.5f) == (v.y / a);
-	REQUIRE(Approx(3.5f) == (w.y / a);
-	REQUIRE(Approx(2.5f) == (z.y / a);
+	REQUIRE(Approx(5.5f) == (v.y / a));
+	REQUIRE(Approx(3.5f) == (w.y / a));
+	REQUIRE(Approx(2.5f) == (z.y / a));
 }
 
 TEST_CASE("describe_2vektor_multi2", "[2multi2 vec2]")
@@ -135,13 +132,13 @@ TEST_CASE("describe_2vektor_multi2", "[2multi2 vec2]")
 	Vec2 w{2.5f, 3.5f};
 	Vec2 z{0.0f, 5.0f};
 
-	REQUIRE(Approx(6.0f) == (a * v.x);
-	REQUIRE(Approx(10.0f) == (a * w.x);
-	REQUIRE(Approx(0.0f) == (a * z.x);
+	REQUIRE(Approx(6.0f) == (a * v.x));
+	REQUIRE(Approx(10.0f) == (a * w.x));
+	REQUIRE(Approx(0.0f) == (a * z.x));
 	
-	REQUIRE(Approx(10.0f) == (a * v.y);
-	REQUIRE(Approx(14.0f) == (a * w.y);
-	REQUIRE(Approx(20.0f) == (a * z.y);
+	REQUIRE(Approx(10.0f) == (a * v.y));
+	REQUIRE(Approx(14.0f) == (a * w.y));
+	REQUIRE(Approx(20.0f) == (a * z.y));
 }
 
 int main(int argc, char *argv[])

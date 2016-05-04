@@ -46,7 +46,7 @@ Vec2 operator + (Vec2 const& u, Vec2 const& v)
 
 	return a;
 }
-Vec2 operator - (Vec2 const& u, Vec2 const& v);
+Vec2 operator - (Vec2 const& u, Vec2 const& v)
 {
 	Vec2 a;
 	a.x = u.x - v.x;
@@ -54,7 +54,7 @@ Vec2 operator - (Vec2 const& u, Vec2 const& v);
 
 	return a;
 }
-Vec2 operator * (Vec2 const& v, float s);
+Vec2 operator * (Vec2 const& v, float s)
 {
 	Vec2 a;
 	a.x = v.x * s;
@@ -62,7 +62,7 @@ Vec2 operator * (Vec2 const& v, float s);
 
 	return a;
 }
-Vec2 operator / (Vec2 const& v, float s);
+Vec2 operator / (Vec2 const& v, float s)
 {
 	Vec2 a;
 	a.x = v.x / s;
@@ -70,7 +70,7 @@ Vec2 operator / (Vec2 const& v, float s);
 
 	return a;
 }
-Vec2 operator * (float s, Vec2 const& v);
+Vec2 operator * (float s, Vec2 const& v)
 {
 	Vec2 a;
 	a.x = s * v.x;
