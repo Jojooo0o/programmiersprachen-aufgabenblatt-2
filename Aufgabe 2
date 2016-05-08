@@ -1,0 +1,18 @@
+Aufgabe 2
+	#ifndef
+	#define
+	#endif
+	
+	"include guard schützt vor Mehrfacheinbindung einer .hpp
+
+	Desktruktor	löscht Objekte nachdem der Gülitgkeitsbereich verlassen haben (z.B schleifen, methoden)
+	
+	sinnvoll
+			
+	class - default private members
+	struct - default public members
+	
+	
+	Methoden sind Member-Funktionen von Klassen
+	
+	Überladen	mehrere Funktionen mit derselben Bezeichnung aber unterschiedlichen Signaturen
