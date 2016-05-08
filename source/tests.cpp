@@ -3,7 +3,9 @@
 #include <cmath>
 #include "vec2.hpp"
 #include "mat2.hpp"
-
+#include "color.hpp"
+#include "rectangle.hpp"
+#include "circle.hpp"
 
 TEST_CASE("describe_default_constructor", "[constructor vec2]")
 {
@@ -229,7 +231,7 @@ TEST_CASE("describe_matrix_vec2", "[multi 2matvec2]"){
 	REQUIRE(Approx(14.0f) == a.y);
 }
 
-TEST_CASE("describe_matrix_det", "[matrix det]"){
+TEST_CASE("describe_matrix_det", "[det]"){
 
 	Mat2 n{1.0f, 2.0f, 3.0f, 4.0f};
 
@@ -237,7 +239,7 @@ TEST_CASE("describe_matrix_det", "[matrix det]"){
 
 }
 
-TEST_CASE("describe_matrix_inverse", "[matrix inverse]"){
+TEST_CASE("describe_matrix_inverse", "[inverse]"){
 
 	Mat2 n{1.0f, 2.0f, 3.0f, 4.0f};
 
@@ -247,29 +249,81 @@ TEST_CASE("describe_matrix_inverse", "[matrix inverse]"){
 	REQUIRE(Approx(1.0f) == n.a1_2);
 	REQUIRE(Approx(1.5f) == n.a2_1);
 	REQUIRE(Approx(-0.5f) == n.a2_2);
+
 }
 
-TEST_CASE("describe_matrix_transponse", "[matrix transponse]"){
+TEST_CASE("describe_matrix_transpose", "[transpose]"){
 
 	Mat2 n{1.0f, 2.0f, 3.0f, 4.0f};
 
-	n = transponse(n);
+	n = transpose(n);
 
 	REQUIRE(Approx(1.0f) == n.a1_1);
 	REQUIRE(Approx(3.0f) == n.a1_2);
 	REQUIRE(Approx(2.0f) == n.a2_1);
 	REQUIRE(Approx(4.0f) == n.a2_2);
+
 }
 
-TEST_CASE("describe_matrix_rotate", "[matrix rotate]"){
+TEST_CASE("describe_rotation", "[rotation]"){
 
-	Mat2 n = make_rotation_mat2(M_PI/2);
-	Vec2 v{1.0,0.0};
+	
+	Mat2 m = make_rotation_mat2(M_PI/2);
+	Vec2 v{1.0f,0.0f};
 
-	v = v * n;
+	v = v * m;
 
 	REQUIRE(Approx(0.0f) == v.x);
 	REQUIRE(Approx(1.0f) == v.y);
+
+}
+
+TEST_CASE("describe_color", "[color]"){
+	Color black{0.0f};
+	Color red{1.0f, 0.0f, 0.0f};
+	//Color wrong{5.0, 0.0, 0.0};
+
+	REQUIRE(0.0f == black.r);
+	REQUIRE(0.0f == black.g);
+	REQUIRE(0.0f == black.b);
+
+	REQUIRE(1.0f == red.r);
+	REQUIRE(0.0f == red.g);
+	REQUIRE(0.0f == red.b);
+}
+
+TEST_CASE("describe_rectangle", "[rectangle]"){
+	Rectangle r;
+	Rectangle r2{2.0f, 3.0f, 1.0f, 1.0f, 0.0f};
+
+
+	REQUIRE(r.get_h() == 1.0f);
+	REQUIRE(r.get_w() == 2.0f);
+	REQUIRE(r.get_x() == 0.0f);
+	REQUIRE(r.get_y() == 0.0f);
+
+	REQUIRE(r2.get_h() == 2.0f);
+	REQUIRE(r2.get_w() == 3.0f);
+	REQUIRE(r2.get_x() == 1.0f);
+	REQUIRE(r2.get_y() == 1.0f);
+
+
+	REQUIRE(r2.circumference() == 10.0f);
+}
+
+TEST_CASE("descricbe_circle", "[circle]"){
+	Circle c;
+	Circle c2{5.0f, 0.5f, 0.4f, 1.0f};
+
+	REQUIRE(c.get_r() == 1.0f);
+	REQUIRE(c.get_centerx() == 0.5f);
+	REQUIRE(c.get_centery() == 0.5f);
+	
+	REQUIRE(c2.get_r() == 5.00f);
+	REQUIRE(c2.get_centerx() == 0.5f);
+	REQUIRE(c2.get_centery() == 0.4f);
+
+	REQUIRE(c2.circumference() == Approx(10.0f*M_PI)); 
 }
 
 int main(int argc, char *argv[])
